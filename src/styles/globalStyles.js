@@ -8,7 +8,7 @@ export const Screen = styled.div`
   background-position: center;
   width: 100%;
   min-height: 100vh;
-  display: flex;
+  display: flex
   flex-direction: column;
 `;
 

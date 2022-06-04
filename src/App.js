@@ -78,7 +78,7 @@ export const StyledImg = styled.img`
   box-shadow: 0px 5px 11px 2px rgba(0, 0, 0, 0.7);
   border: 4px dashed var(--secondary);
   background-color: var(--accent);
-  border-radius: 100%;
+  border-radius: 0%;
   width: 200px;
   @media (min-width: 900px) {
     width: 250px;
@@ -102,22 +102,22 @@ function App() {
   const [feedback, setFeedback] = useState(`Click buy to mint your NFT.`);
   const [mintAmount, setMintAmount] = useState(1);
   const [CONFIG, SET_CONFIG] = useState({
-    CONTRACT_ADDRESS: "",
-    SCAN_LINK: "",
+    CONTRACT_ADDRESS: "0x81D6b1137faBad54c8cee3e8673Db720071b7364",
+    SCAN_LINK: "https://rinkeby.etherscan.io/token/0x81D6b1137faBad54c8cee3e8673Db720071b7364",
     NETWORK: {
-      NAME: "",
-      SYMBOL: "",
-      ID: 0,
+      NAME: "Ethereum",
+      SYMBOL: "ETH",
+      ID: 4,
     },
-    NFT_NAME: "",
-    SYMBOL: "",
-    MAX_SUPPLY: 1,
+    NFT_NAME: "MoonSharks",
+    SYMBOL: "SHARKS",
+    MAX_SUPPLY: 1111,
     WEI_COST: 0,
     DISPLAY_COST: 0,
     GAS_LIMIT: 0,
     MARKETPLACE: "",
     MARKETPLACE_LINK: "",
-    SHOW_BACKGROUND: false,
+    SHOW_BACKGROUND: true,
   });
 
   const claimNFTs = () => {
@@ -129,7 +129,7 @@ function App() {
     console.log("Gas limit: ", totalGasLimit);
     setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
     setClaimingNft(true);
-    blockchain.smartContract.methods
+    blockchain.smartContract
       .mint(mintAmount)
       .send({
         gasLimit: String(totalGasLimit),
@@ -162,8 +162,8 @@ function App() {
 
   const incrementMintAmount = () => {
     let newMintAmount = mintAmount + 1;
-    if (newMintAmount > 10) {
-      newMintAmount = 10;
+    if (newMintAmount > 5) {
+      newMintAmount = 5;
     }
     setMintAmount(newMintAmount);
   };
@@ -199,13 +199,12 @@ function App() {
         flex={1}
         ai={"center"}
         style={{ padding: 24, backgroundColor: "var(--primary)" }}
-        image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.png" : null}
+        image={CONFIG.SHOW_BACKGROUND ? "/config/images/background.png" : null}
       >
-        <StyledLogo alt={"logo"} src={"/config/images/logo.png"} />
-        <s.SpacerSmall />
+       
         <ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
           <s.Container flex={1} jc={"center"} ai={"center"}>
-            <StyledImg alt={"example"} src={"/config/images/example.gif"} />
+          
           </s.Container>
           <s.SpacerLarge />
           <s.Container
@@ -216,7 +215,7 @@ function App() {
               backgroundColor: "var(--accent)",
               padding: 24,
               borderRadius: 24,
-              border: "4px dashed var(--secondary)",
+              border: "0px dashed var(--secondary)",
               boxShadow: "0px 5px 11px 2px rgba(0,0,0,0.7)",
             }}
           >
@@ -371,11 +370,7 @@ function App() {
           </s.Container>
           <s.SpacerLarge />
           <s.Container flex={1} jc={"center"} ai={"center"}>
-            <StyledImg
-              alt={"example"}
-              src={"/config/images/example.gif"}
-              style={{ transform: "scaleX(-1)" }}
-            />
+
           </s.Container>
         </ResponsiveWrapper>
         <s.SpacerMedium />
